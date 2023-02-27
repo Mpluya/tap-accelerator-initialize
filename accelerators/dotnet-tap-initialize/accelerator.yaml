@@ -1,0 +1,49 @@
+accelerator:
+  displayName: Customized TAP Project Configuration
+  description: Boilerplate for generating Tanzu Application Platform Workload configuration files to add to an existing target project.
+  tags:
+    - mae
+
+  options:
+    - name: targetProject
+      label: Name of the target project
+      description: The name of the project where you will add the generated files
+      defaultValue: "target-project"
+
+  imports:
+    - name: tap-initialize
+      expose:
+        - name: "includeHasTests"
+    - name: live-update
+    - name: tap-workload
+
+engine:
+  merge:
+    - include: ["**/*"]
+      exclude: ["README.md", "INSTUCTIONS.md", "LICENSE"]
+    - include: ["INSTRUCTIONS.md"]
+      chain:
+        - type: ReplaceText
+          substitutions:
+            - text: my-project
+              with: "#targetProject"
+
+    - chain:
+      - type: InvokeFragment
+        let:
+        - name: artifactId
+          expression: "#targetProject"
+        - name: gitRepository
+          expression: "'https://git.example.com/my-repo'"
+        reference: tap-initialize
+      - merge:
+          - type: InvokeFragment
+            reference: tap-workload
+          - include: [ "**" ]
+        onConflict: UseFirst
+
+    - type: InvokeFragment
+      let:
+      - name: artifactId
+        expression: "#targetProject"
+      reference: live-update
