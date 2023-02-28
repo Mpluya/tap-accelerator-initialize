@@ -14,7 +14,7 @@ accelerator:
     - name: tap-initialize
       expose:
         - name: "includeHasTests"
-    - name: live-update
+    - name: dotnet-live-update
     - name: tap-workload
 
 engine:

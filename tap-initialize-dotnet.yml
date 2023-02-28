@@ -1,12 +1,10 @@
 apiVersion: accelerator.apps.tanzu.vmware.com/v1alpha1
-kind: Fragment
+kind: Accelerator
 metadata:
-  name: dotnet-live-update
-  namespace: accelerator-system
+  name: dotnet-tap-initialize
 spec:
-  displayName: dotnet live update fragment
   git:
     ref:
       branch: main
     url: https://github.com/Mpluya/tap-accelerator-initialize.git
-    subPath: fragments/dotnet-live-update
+    subPath: accelerators/tap-initialize
