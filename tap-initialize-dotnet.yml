@@ -2,9 +2,11 @@ apiVersion: accelerator.apps.tanzu.vmware.com/v1alpha1
 kind: Accelerator
 metadata:
   name: dotnet-tap-initialize
+  namespace: accelerator-system
 spec:
+  displayName: custom dotnet tap initialize accelerator
   git:
     ref:
       branch: main
     url: https://github.com/Mpluya/tap-accelerator-initialize.git
-    subPath: accelerators/tap-initialize
+    subPath: accelerators/dotnet-tap-initialize
