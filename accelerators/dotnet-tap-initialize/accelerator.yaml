@@ -46,4 +46,4 @@ engine:
       let:
       - name: artifactId
         expression: "#targetProject"
-      reference: live-update
+      reference: dotnet-live-update
